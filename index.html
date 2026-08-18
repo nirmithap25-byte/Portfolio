@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="images/logo.png" />
+    <title>Nirmitha P | Portfolio</title>
+    
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'picto-primary': '#9929fb',
+                        'picto-primary-dark': '#650fa0',
+                        'soft-white': '#f0f1f3',
+                        'soft-dark': '#87909d',
+                    },
+                    screens: {
+                        'xxs': '340px',
+                        'xs': '363px',
+                        'xxl': '1320px',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Link Compiled Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Inline stylesheet modifications for custom components like the marquee and animations -->
+    <style>
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: #f0f1f3;
+            color: #1f2937;
+            scroll-behavior: smooth;
+        }
+
+        .bg-highlight {
+            background: linear-gradient(to top, #ffc8c8 40%, transparent 40%);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+
+        /* Tech Stack Loop Marquee */
+        .marquee-container {
+            overflow: hidden;
+            width: 100%;
+            display: flex;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 5rem;
+            animation: marquee-scroll 25s linear infinite;
+            white-space: nowrap;
+        }
+
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee-scroll {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Custom Scroll Active Class */
+        .nav-active {
+            background-color: #9929fb !important;
+            color: white !important;
+        }
+        
+        /* Profile Image Hover Zoom */
+        .zoom-img-container img {
+            transition: transform 0.5s ease;
+        }
+        .zoom-img-container:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Float shadow */
+        .float-shadow {
+            box-shadow: 0px 0px 90px 9px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Mobile Menu overlay drawer */
+        .mobile-menu-drawer {
+            transition: transform 0.3s ease-in-out;
+            transform: translateY(-100%);
+        }
+        .mobile-menu-drawer.open {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <!-- ========================================== -->
+    <!-- NAVBAR                                     -->
+    <!-- ========================================== -->
+    <div id="navbar-sticky" class="sticky top-0 z-50 bg-white border-white transition-all duration-500 border-b border-transparent">
+        <div class="navbar flex justify-between mx-auto max-w-[1320px] px-4 md:px-8 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Mobile Drawer Trigger -->
+                <div class="dropdown lg:hidden mr-2">
+                    <button id="mobile-menu-btn" role="button" class="btn btn-ghost p-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+
+                <a href="#introduction" class="flex items-center border-0 gap-3">
+                    <div class="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-tr from-[#9929fb] to-[#da4df1] flex items-center justify-center text-white font-extrabold text-xl sm:text-2xl shadow-md shadow-purple-200 shrink-0">
+                        N
+                    </div>
+                    <p class="text-xl sm:text-2xl my-auto font-semibold text-black">
+                        Nirmitha
+                    </p>
+                </a>
+            </div>
+
+            <!-- Desktop Menu Links -->
+            <div class="hidden lg:flex items-center">
+                <ul class="menu menu-horizontal text-[16px] font-medium shrink-0 flex gap-1">
+                    <li><a href="#introduction" class="hover:text-[#9929fb] px-4 py-2.5 mx-1 rounded-lg duration-300">Home</a></li>
+                    <li><a href="#profile" class="hover:text-[#9929fb] px-4 py-2.5 mx-1 rounded-lg duration-300">About</a></li>
+                    <li><a href="#work-process" class="hover:text-[#9929fb] px-4 py-2.5 mx-1 rounded-lg duration-300">Internship</a></li>
+                    <li><a href="#portfolio" class="hover:text-[#9929fb] px-4 py-2.5 mx-1 rounded-lg duration-300">Project</a></li>
+                    <li><a href="#services" class="hover:text-[#9929fb] px-4 py-2.5 mx-1 rounded-lg duration-300">Skills</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <a class="btn btn-sm sm:btn-md btn-primary px-5 rounded-lg text-white font-semibold" href="#contact">
+                    Contact
+                </a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer (Overlay) -->
+        <div id="mobile-drawer" class="mobile-menu-drawer absolute top-full left-0 w-full bg-white shadow-lg border-t border-gray-100 lg:hidden z-40">
+            <ul class="menu menu-vertical p-4 font-semibold text-black flex flex-col gap-2">
+                <li><a href="#introduction" class="mobile-link hover:text-[#9929fb] block py-3 px-4 rounded-lg">Home</a></li>
+                <li><a href="#profile" class="mobile-link hover:text-[#9929fb] block py-3 px-4 rounded-lg">About</a></li>
+                <li><a href="#work-process" class="mobile-link hover:text-[#9929fb] block py-3 px-4 rounded-lg">Internship</a></li>
+                <li><a href="#portfolio" class="mobile-link hover:text-[#9929fb] block py-3 px-4 rounded-lg">Project</a></li>
+                <li><a href="#services" class="mobile-link hover:text-[#9929fb] block py-3 px-4 rounded-lg">Skills</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- HERO / INTRODUCTION SECTION                 -->
+    <!-- ========================================== -->
+    <div class="introduction-profile-background bg-gradient-to-b from-white to-[#f0f1f3]">
+        <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24 lg:mb-12 flex flex-col-reverse lg:flex-row justify-between items-center gap-10" id="introduction">
+            
+            <!-- Left Info Panel -->
+            <div class="w-full flex flex-col justify-between max-lg:text-center">
+                <div class="pt-4 lg:pr-12 w-full transition-all duration-500">
+                    <p class="text-3xl xxs:text-4xl sm:text-5xl xl:text-6xl font-semibold w-full text-black">
+                        Hello, I’m
+                        <span class="text-nowrap shrink-0 inline-block w-full text-[#9929fb] mt-2">
+                            Nirmitha P
+                        </span>
+                    </p>
+                    <p class="text-lg sm:text-xl font-medium text-gray-700 mt-4">
+                        MCA Student
+                    </p>
+                    <p class="text-sm xxs:text-lg lg:text-[18px] my-6 leading-relaxed text-gray-500">
+                        To enhance my professional skills, capabilities and knowledge in an organization which recognizes the value of hard work and trusts me with responsibilities and challenges.
+                    </p>
+                    <div class="mt-8">
+                        <a class="btn btn-primary px-8 py-3 text-white font-semibold rounded-lg hover:shadow-lg transition duration-300" href="mailto:nirmithap25@gmail.com">
+                            Say Hello!
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Stats summary section -->
+                <div class="mx-auto lg:mx-0 relative mt-12 w-full">
+                    <div class="grid grid-cols-3 w-full max-w-lg mt-2 gap-4 bg-white p-5 rounded-2xl shadow-sm border border-gray-150">
+                        <div class="text-center">
+                            <p class="text-xs text-gray-500 font-medium">Education</p>
+                            <p class="text-lg sm:text-2xl font-bold text-black mt-1">MCA</p>
+                        </div>
+                        <div class="text-center border-x border-gray-200">
+                            <p class="text-xs text-gray-500 font-medium">Projects</p>
+                            <p class="text-lg sm:text-2xl font-bold text-black mt-1">3</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xs text-gray-500 font-medium">Skills</p>
+                            <p class="text-lg sm:text-2xl font-bold text-black mt-1">5+</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Hero Image -->
+            <div class="max-w-[480px] w-full max-lg:mx-auto aspect-[536/636] relative">
+                <img class="shadow-2xl shadow-gray-300 w-full h-full object-contain p-6 bg-white rounded-3xl border border-gray-100" src="images/person.png" alt="Nirmitha P" />
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ABOUT ME / PROFILE SECTION                 -->
+    <!-- ========================================== -->
+    <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 mb-20 lg:mb-32" id="profile">
+        <div class="relative z-10 rounded-3xl bg-white float-shadow p-6 sm:p-12 md:p-20 xl:p-24 border border-gray-100">
+            <div class="flex flex-col lg:flex-row justify-between items-center gap-12">
+                
+                <!-- Left Profile Image -->
+                <div class="w-full lg:max-w-[424px]">
+                    <div class="zoom-img-container w-full aspect-[424/468] object-fill overflow-hidden rounded-2xl bg-gray-50 border border-gray-100">
+                        <img class="w-full h-full object-cover" src="images/person2.png" alt="About Nirmitha P" />
+                    </div>
+                    
+                    <!-- Floating Social Media Bar -->
+                    <div class="relative -mt-6">
+                        <div class="flex justify-center">
+                            <div class="px-6 py-3.5 z-20 text-center bg-white rounded-xl shadow-xl border border-gray-100 flex gap-6 text-gray-500">
+                                <a href="https://github.com/nirmithap25-byte" target="_blank" class="hover:text-[#9929fb] transition duration-300 text-lg"><i class="fa-brands fa-github"></i></a>
+                                <a href="https://www.linkedin.com/in/nirmitha-p-49a627302" target="_blank" class="hover:text-[#9929fb] transition duration-300 text-lg"><i class="fa-brands fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Bio Panel -->
+                <div class="w-full lg:w-[520px]">
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl text-black font-semibold mb-6 max-lg:text-center leading-snug">
+                        I am an MCA Student & Aspiring Full Stack Developer
+                    </h2>
+                    <div class="text-sm sm:text-base lg:text-[17px] font-normal text-gray-500 max-lg:text-center leading-relaxed flex flex-col gap-4">
+                        <p>
+                            I am Nirmitha P, currently pursuing my MCA in MITM. I completed my BCA from JSS College for Women, Mysuru, which laid a solid foundation in computer science concepts, coding logic, and databases.
+                        </p>
+                        <p>
+                            I have a strong passion for full stack web development, specifically learning to build responsive client interfaces and working with Python, Core Java, web technologies, and SQL databases. I enjoy solving coding exercises, refining design interfaces, and building backend project applications.
+                        </p>
+                    </div>
+                    
+                    <!-- CTAs -->
+                    <div class="mt-10 flex flex-wrap gap-4 max-lg:justify-center">
+                        <a class="btn btn-primary px-8 py-3 text-white font-semibold rounded-lg hover:shadow-lg transition duration-300" href="#portfolio">
+                            My Projects
+                        </a>
+                        <a class="btn border border-gray-300 bg-white px-8 py-3 text-gray-700 hover:border-[#9929fb] hover:text-[#9929fb] font-semibold rounded-lg transition duration-300" href="Nirmitha Resume.pdf" download>
+                            <i class="fa-solid fa-download mr-2"></i> Download CV
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- WORK PROCESS SECTION                       -->
+    <!-- ========================================== -->
+    <div class="bg-white py-16 sm:py-24 lg:py-32 border-y border-gray-100" id="work-process">
+        <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 grid xl:grid-cols-2 xl:items-center gap-12">
+            
+            <!-- Left Headline Panel -->
+            <div class="lg:pr-12 max-xl:text-center">
+                <p class="section-title text-[#9929fb] font-bold tracking-wider uppercase text-sm mb-4">Internship</p>
+                <h3 class="text-3xl sm:text-4xl font-semibold text-black mb-2 leading-tight">Python Development</h3>
+                <h4 class="text-lg font-medium text-gray-700 mb-6">techCentrix • Feb 2025 – March 2025</h4>
+                <p class="text-sm sm:text-base lg:text-lg text-gray-500 font-normal leading-relaxed mb-6">
+                    Developed and maintained Python code to automate various internal tasks, bridging theoretical concepts with hands-on programming experience.
+                </p>
+                <p class="text-sm sm:text-base lg:text-lg text-gray-500 font-normal leading-relaxed">
+                    Collaborated on script maintenance, code debugging, and task automation to optimize efficiency.
+                </p>
+            </div>
+
+            <!-- Right Process Cards Grid -->
+            <div class="grid sm:grid-cols-2 justify-center gap-6 w-fit mx-auto">
+                
+                <!-- Card 1 -->
+                <div class="p-8 bg-gray-50 aspect-auto w-full sm:max-w-[312px] rounded-2xl border border-gray-100 flex flex-col gap-4 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center text-[#9929fb] text-xl">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-black">1. Task Automation</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">Created automated Python scripts to optimize and accelerate various internal business workflows.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="p-8 bg-gray-50 aspect-auto w-full sm:max-w-[312px] rounded-2xl border border-gray-100 flex flex-col gap-4 shadow-sm sm:mt-6">
+                    <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center text-[#9929fb] text-xl">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-black">2. Code Scripting</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">Wrote clean, well-structured, and efficient code to handle server-side files and utilities.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="p-8 bg-gray-50 aspect-auto w-full sm:max-w-[312px] rounded-2xl border border-gray-100 flex flex-col gap-4 shadow-sm sm:-mt-6">
+                    <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center text-[#9929fb] text-xl">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-black">3. Practical Application</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">Applied theoretical programming concepts directly to solve functional operational challenges.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="p-8 bg-gray-50 aspect-auto w-full sm:max-w-[312px] rounded-2xl border border-gray-100 flex flex-col gap-4 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center text-[#9929fb] text-xl">
+                        <i class="fa-solid fa-wrench"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-black">4. Maintenance</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">Monitored automation status, corrected script bugs, and updated script documentation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PORTFOLIO / PROJECTS SECTION               -->
+    <!-- ========================================== -->
+    <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32" id="portfolio">
+        
+        <!-- Section Header -->
+        <div class="mb-12 sm:mb-20 text-center max-w-lg mx-auto">
+            <h3 class="text-3xl sm:text-4xl font-semibold text-black mb-4">My Recent Work</h3>
+            <p class="text-sm sm:text-base text-gray-400">
+                Here is a selection of my recent developments, demonstrating my skills in creating full stack apps, API structures, and databases.
+            </p>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+            
+            <!-- Project 1 -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col hover:-translate-y-2 hover:shadow-lg transition duration-300">
+                <div class="aspect-[360/240] bg-gray-50 overflow-hidden">
+                    <img src="images/card-2.png" class="w-full h-full object-cover" alt="Smart Recruitment System project" />
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <span class="text-xs font-bold text-[#9929fb] tracking-wider mb-2">PYTHON • MYSQL</span>
+                    <h4 class="text-xl font-semibold text-black mb-3">Smart Recruitment</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed mb-6 flex-grow">
+                        Smart Recruitment For Intelligent Placements And Better Careers. A web-based application to digitize and optimize the college campus placement process. Features an integrated rule-based chatbot to assist students with frequently asked questions.
+                    </p>
+                    <a href="http://127.0.0.1:8000/" target="_blank" class="text-black font-semibold text-sm hover:text-[#9929fb] flex items-center gap-2">
+                        View Project <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col hover:-translate-y-2 hover:shadow-lg transition duration-300">
+                <div class="aspect-[360/240] bg-gray-50 overflow-hidden">
+                    <img src="images/card-1.jpg" class="w-full h-full object-cover" alt="StockWatch project" />
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <span class="text-xs font-bold text-[#9929fb] tracking-wider mb-2">PYTHON • FLASK • ML</span>
+                    <h4 class="text-xl font-semibold text-black mb-3">StockWatch</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed mb-6 flex-grow">
+                        Smarter Inventory and Safer Audits system built using Flask, MySQL, and ML-based anomaly detection. It includes QR code scanning, audit logs, stock tracking, and approval workflows.
+                    </p>
+                    <a href="file:///C:/Users/Nirmitha P/Desktop/Mini_Project/Frontend/index.html" target="_blank" class="text-black font-semibold text-sm hover:text-[#9929fb] flex items-center gap-2">
+                        View Project <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col hover:-translate-y-2 hover:shadow-lg transition duration-300">
+                <div class="aspect-[360/240] bg-gray-50 overflow-hidden">
+                    <img src="images/card-3.jpg" class="w-full h-full object-cover" alt="Portfolio Website project" />
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <span class="text-xs font-bold text-[#9929fb] tracking-wider mb-2">HTML • CSS • JS</span>
+                    <h4 class="text-xl font-semibold text-black mb-3">Developer Portfolio</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed mb-6 flex-grow">
+                        A highly responsive, premium developer portfolio built using HTML5, CSS3, and Vanilla JavaScript to showcase my projects and capabilities.
+                    </p>
+                    <a href="#introduction" class="text-black font-semibold text-sm hover:text-[#9929fb] flex items-center gap-2">
+                        View Project <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- WHAT I DO / SERVICES SECTION               -->
+    <!-- ========================================== -->
+    <div class="bg-white py-16 sm:py-24 lg:py-32 border-t border-gray-100" id="services">
+        <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12">
+            
+            <!-- Left Info Panel -->
+            <div class="flex flex-col justify-center h-full pr-0 lg:pr-16 max-md:text-center">
+                <div>
+                    <p class="section-title text-[#9929fb] font-bold tracking-wider uppercase text-sm mb-3">Skills</p>
+                    <h3 class="text-3xl sm:text-4xl font-semibold text-black mb-6">Technical Capabilities</h3>
+                    <div class="text-sm sm:text-base lg:text-lg text-gray-500 leading-relaxed flex flex-col gap-4">
+                        <p>
+                            I focus on developing full stack applications, designing responsive client interfaces, and writing logical backend scripts to solve programming challenges and construct functional applications.
+                        </p>
+                        <p>
+                            My development workflow combines client-side interactivity with server-side logic to build unified, interactive, and responsive web software projects.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Skill Roles Panel -->
+            <div class="flex flex-col gap-6">
+                
+                <!-- Role 1 -->
+                <div class="p-6 sm:p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-sm transition duration-300">
+                    <h4 class="text-xl font-semibold text-black mb-3">Programming & Frameworks</h4>
+                    <p class="text-sm sm:text-base text-gray-500 leading-relaxed">
+                        Strong focus on <span class="font-semibold text-black">Python</span>, <span class="font-semibold text-black">Core Java</span>, and web frameworks like <span class="font-semibold text-black">Django</span>, <span class="font-semibold text-black">Flask</span>, and <span class="font-semibold text-black">FastAPI</span> to build complete full stack web applications, design backend logic, and configure database connections.
+                    </p>
+                </div>
+
+                <!-- Role 2 -->
+                <div class="p-6 sm:p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-sm transition duration-300">
+                    <h4 class="text-xl font-semibold text-black mb-3">Database Management</h4>
+                    <p class="text-sm sm:text-base text-gray-500 leading-relaxed">
+                        Proficient in utilizing <span class="font-semibold text-black">SQL</span> and <span class="font-semibold text-black">MySQL</span> for creating relational models, managing database tables, optimizing queries, and linking operational backend datasets.
+                    </p>
+                </div>
+
+                <!-- Role 3 -->
+                <div class="p-6 sm:p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-sm transition duration-300">
+                    <h4 class="text-xl font-semibold text-black mb-3">Web Technologies</h4>
+                    <p class="text-sm sm:text-base text-gray-500 leading-relaxed">
+                        Skilled in <span class="font-semibold text-black">HTML5</span>, <span class="font-semibold text-black">CSS3</span>, and <span class="font-semibold text-black">JavaScript</span> to design responsive interface mockups, style components, and add frontend interactivity.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- CONTACT SECTION                            -->
+    <!-- ========================================== -->
+    <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div class="bg-white rounded-3xl p-6 sm:p-12 lg:p-20 border border-gray-100 float-shadow" id="contact">
+            <div class="flex flex-col-reverse lg:flex-row gap-12 justify-between">
+                
+                <!-- Left Info Details -->
+                <div class="w-full lg:w-[45%] flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-3xl font-semibold text-black hidden lg:block leading-tight">Let's discuss your Project</h3>
+                        <p class="text-sm sm:text-base text-gray-400 mt-4 leading-relaxed max-lg:text-center">
+                            I'm available for internships, project collaboration, or full-time opportunities. Drop me a line if you have a project you think I'd be a good fit for.
+                        </p>
+                    </div>
+
+                    <!-- Address/Info Cards -->
+                    <div class="my-8 flex flex-col gap-6">
+                        <!-- Location -->
+                        <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 duration-300 border border-transparent hover:border-gray-100">
+                            <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center text-[#9929fb]">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400 font-medium">Address</p>
+                                <p class="text-sm sm:text-base font-semibold text-black">Mysuru, Karnataka, India</p>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 duration-300 border border-transparent hover:border-gray-100">
+                            <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center text-[#9929fb]">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400 font-medium">My Email</p>
+                                <p class="text-sm sm:text-base font-semibold text-black"><a href="mailto:nirmithap25@gmail.com" class="hover:underline">nirmithap25@gmail.com</a></p>
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 duration-300 border border-transparent hover:border-gray-100">
+                            <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center text-[#9929fb]">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400 font-medium">Call Me Now</p>
+                                <p class="text-sm sm:text-base font-semibold text-black">+91 81051 69511</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Icons -->
+                    <div class="flex gap-6 max-lg:justify-center text-gray-400 text-xl border-t border-gray-100 pt-6">
+                        <a href="https://github.com/nirmithap25-byte" target="_blank" class="hover:text-[#9929fb] transition duration-300"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/nirmitha-p-49a627302" target="_blank" class="hover:text-[#9929fb] transition duration-300"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Right Contact Form -->
+                <div class="w-full lg:w-[50%]">
+                    <h3 class="text-2xl sm:text-3xl font-semibold text-black lg:hidden text-center mb-6">Let's discuss your Project</h3>
+                    <p class="text-sm text-gray-500 mb-6 max-lg:text-center">I'm always open to discussing web development work or student project collaborations.</p>
+                    
+                    <form class="flex flex-col gap-5">
+                        <input type="text" placeholder="Name*" class="input border-0 border-b border-gray-200 focus:border-[#9929fb] focus:outline-none placeholder:text-gray-400 w-full px-0 py-3 rounded-none text-black bg-white" required>
+                        <input type="email" placeholder="Email*" class="input border-0 border-b border-gray-200 focus:border-[#9929fb] focus:outline-none placeholder:text-gray-400 w-full px-0 py-3 rounded-none text-black bg-white" required>
+                        <input type="text" placeholder="Location*" class="input border-0 border-b border-gray-200 focus:border-[#9929fb] focus:outline-none placeholder:text-gray-400 w-full px-0 py-3 rounded-none text-black bg-white" required>
+                        <div class="flex flex-col sm:flex-row gap-5">
+                            <input type="text" placeholder="Budget*" class="input border-0 border-b border-gray-200 focus:border-[#9929fb] focus:outline-none placeholder:text-gray-400 w-full sm:w-[50%] px-0 py-3 rounded-none text-black bg-white" required>
+                            <input type="text" placeholder="Subject*" class="input border-0 border-b border-gray-200 focus:border-[#9929fb] focus:outline-none placeholder:text-gray-400 w-full px-0 py-3 rounded-none text-black bg-white" required>
+                        </div>
+                        <textarea placeholder="Message*" class="textarea border-0 border-b border-gray-200 focus:border-[#9929fb] focus:outline-none placeholder:text-gray-400 w-full px-0 py-3 rounded-none min-h-[100px] text-black bg-white" required></textarea>
+                        
+                        <div class="mt-4 max-lg:text-center">
+                            <button type="submit" class="btn btn-primary px-8 py-3 text-white font-semibold rounded-lg hover:shadow-lg transition duration-300 flex items-center gap-3 max-lg:mx-auto">
+                                Submit <i class="fa-solid fa-paper-plane text-xs"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- FOOTER                                     -->
+    <!-- ========================================== -->
+    <footer class="bg-[#2A374A] text-white">
+        <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-10">
+            <div class="flex flex-col md:flex-row justify-between items-center border-b border-gray-700 pb-10 gap-6">
+                <a href="#introduction" class="flex items-center border-0 gap-3">
+                    <div class="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-tr from-[#9929fb] to-[#da4df1] flex items-center justify-center text-white font-extrabold text-xl sm:text-2xl shadow-md shadow-purple-500/20 shrink-0">
+                        N
+                    </div>
+                    <p class="text-2xl sm:text-3xl my-auto font-semibold text-white">
+                        Nirmitha
+                    </p>
+                </a>
+                
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="#introduction" class="hover:text-[#9929fb] text-sm sm:text-base duration-300">Home</a>
+                    <a href="#profile" class="hover:text-[#9929fb] text-sm sm:text-base duration-300">About</a>
+                    <a href="#work-process" class="hover:text-[#9929fb] text-sm sm:text-base duration-300">Internship</a>
+                    <a href="#portfolio" class="hover:text-[#9929fb] text-sm sm:text-base duration-300">Project</a>
+                    <a href="#services" class="hover:text-[#9929fb] text-sm sm:text-base duration-300">Skills</a>
+                </div>
+                
+                <p class="text-sm sm:text-base text-gray-400">
+                    Copyright &copy; <span id="copyright-year">2026</span> Nirmitha P.
+                </p>
+            </div>
+            
+            <p class="text-center text-xs sm:text-sm text-gray-400 pt-8">
+                Developed with ❤️ by <a href="https://www.themewagon.com" class="underline hover:text-white" target="_blank">ThemeWagon</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Link Custom Script -->
+    <script src="script.js"></script>
+</body>
+</html>
